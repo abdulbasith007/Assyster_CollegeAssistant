@@ -1,0 +1,31 @@
+{% extends "assyster_app/base.html" %}
+{% load static %}
+{% block content %}
+
+<form action="/" method="post" id="demo-form">
+    {% csrf_token %}
+    <input type="email" class="form-control" placeholder="Email" name="email">
+    <input type="password" class="form-control" placeholder="Password" name="password">
+    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+</form>
+
+<div class="col-12 text-center">
+    <a href="{% url 'signup_staff' %}">Staff Signup</a>
+ </div><!-- /.col -->
+                           <div class="col-12 text-center">
+    <a href="{% url 'signup_student' %}">Student Signup</a>
+ </div><!-- /.col -->
+
+{% if messages %}
+<div class="col-12">
+    {% for message in messages %}
+    {% if message.tags == 'error' %}
+    <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+    {% endif %}
+    {% if message.tags == 'success' %}
+    <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock content %}

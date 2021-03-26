@@ -1,0 +1,63 @@
+{% extends "assyster_app/base.html" %}
+{% load static %}
+
+{% block content %}
+<h3>Staff SignUp page</h3>
+<form method="post" id="demo-form">
+    {% csrf_token %}
+      <div class="input-group mb-3">
+        <input type="email" class="form-control" placeholder="Email" name="email">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-envelope"></span>
+          </div>
+        </div>
+      </div>
+            <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Username" name="username">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-envelope"></span>
+          </div>
+        </div>
+      </div>
+      <div class="input-group mb-3">
+        <input type="password" class="form-control" placeholder="Password" name="password">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-lock"></span>
+          </div>
+        </div>
+      </div>
+        <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Address" name="address">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-lock"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-block" >Signup Staff</button>
+        </div><!-- /.col -->
+
+      </div>
+      <div class="row">
+        {% if messages %}
+       <div class="col-12">
+          {% for message in messages %}
+          {% if message.tags == 'error' %}
+          <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </form>
+
+    {% endblock %}
+
+      

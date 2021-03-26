@@ -1,0 +1,46 @@
+{% extends "assyster_app/base.html" %}
+{% load static %}
+{% block content %}
+<h1>This is admin's home page</h1>
+<h3>Total Students : {{studc}}</h3>
+<h3>Total Staff : {{staffc}}</h3>
+<h3>Total Subjects : {{subc}}</h3>
+<h3>Total Courses : {{coursec}}</h3>
+<br><a href="{% url 'logout' %}" class="small-box-footer">Logout</a>
+<div>
+    <a href="{% url 'add_student' %}" class="small-box-footer">add student</a>
+</div>
+<div>
+    <a href="{% url 'manage_student' %}" class="small-box-footer">Manage student</a>
+</div>
+
+<div>
+    <a href="{% url 'add_staff' %}" class="small-box-footer">add staff</a>
+</div>
+
+<div>
+    <a href="{% url 'manage_staff' %}" class="small-box-footer">Manage staff</a>
+</div>
+
+<div>
+    <a href="{% url 'add_course' %}" class="small-box-footer">add course</a>
+</div>
+
+<div>
+    <a href="{% url 'manage_course' %}" class="small-box-footer">manage course</a>
+</div>
+
+
+<div>
+    <a href="{% url 'add_subject' %}" class="small-box-footer">add subject</a>
+</div>
+
+
+<div>
+    <a href="{% url 'manage_subject' %}" class="small-box-footer">manage subject</a>
+</div>
+
+<div>
+    <a href="{% url 'manage_session' %}" class="small-box-footer">Manage Session</a>
+</div>
+{% endblock content %}
