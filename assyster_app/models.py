@@ -61,6 +61,7 @@ class Students(models.Model):
     session_year_id=models.ForeignKey(SessionYearModel,on_delete=models.CASCADE,null=True,blank=True)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now_add=True)
+    phone_number=models.CharField(max_length=255,null=True,blank=True)
     #fcm_token=models.TextField(default="")
     objects = models.Manager()
 
@@ -73,20 +74,72 @@ def create_user_profile(sender,instance,created,**kwargs):
         if instance.user_type==2:
             o=Staffs.objects.create(admin=instance)
         if instance.user_type==3:
-            print("here in models.py")
+            #print("here in models.py")
             o=Students(admin=instance)
-            print("2nd last ")
+            #print("2nd last ")
         o.save()
-        print("Last")
+        #print("Last")
+
+class Tests(models.Model):
+    test_name=models.CharField(max_length=255,null=True,blank=True)
+    conducted_by=models.ForeignKey(Staffs,on_delete=models.CASCADE)
+    date=models.DateField()
+    #course_id=models.ForeignKey(Courses,on_delete=models.DO_NOTHING,null=True,blank=True)
+    subject_id=models.ForeignKey(Subjects,on_delete=models.DO_NOTHING,null=True,blank=True)
 
 
-
+########################################################################
+#Handle this
 class StudentResult(models.Model):
     id=models.AutoField(primary_key=True)
     student_id=models.ForeignKey(Students,on_delete=models.CASCADE)
-    subject_id=models.ForeignKey(Subjects,on_delete=models.CASCADE)
-    subject_exam_marks=models.FloatField(default=0)
+    marks=models.FloatField(default=0,null=True,blank=True)
+    test_id=models.ForeignKey(Tests,default=1,on_delete=models.DO_NOTHING,null=True,blank=True)
+
+    def get_test(self):
+        t= Tests.objects.get(id=self.test_id).first()
+        return t.test_name
+    #subject_id=models.ForeignKey(Subjects,on_delete=models.CASCADE)
+    #subject_exam_marks=models.FloatField(default=0)
     #subject_assignment_marks=models.FloatField(default=0)
-    created_at=models.DateField(auto_now_add=True)
-    updated_at=models.DateField(auto_now_add=True)
+    #created_at=models.DateField(auto_now_add=True)
+    #updated_at=models.DateField(auto_now_add=True)
+    #objects=models.Manager()
+
+
+
+#Pending
+'''
+class Attendance(models.Model):
+    id=models.AutoField(primary_key=True)
+    subject_id=models.ForeignKey(Subjects,on_delete=models.DO_NOTHING)
+    attendance_date=models.DateField()
+    created_at=models.DateTimeField(auto_now_add=True)
+    session_year_id=models.ForeignKey(SessionYearModel,on_delete=models.CASCADE)
+    updated_at=models.DateTimeField(auto_now_add=True)
+    objects = models.Manager()
+
+#Pending
+class AttendanceReport(models.Model):
+    id=models.AutoField(primary_key=True)
+    student_id=models.ForeignKey(Students,on_delete=models.DO_NOTHING)
+    attendance_id=models.ForeignKey(Attendance,on_delete=models.CASCADE)
+    status=models.BooleanField(default=False)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now_add=True)
+    objects=models.Manager()
+
+'''
+
+###############################################
+#temp
+class OnlineClassRoom(models.Model):
+    id=models.AutoField(primary_key=True)
+    room_name=models.CharField(max_length=255)
+    room_pwd=models.CharField(max_length=255)
+    subject=models.ForeignKey(Subjects,on_delete=models.CASCADE)
+    session_years=models.ForeignKey(SessionYearModel,on_delete=models.CASCADE)
+    started_by=models.ForeignKey(Staffs,on_delete=models.CASCADE)
+    is_active=models.BooleanField(default=True)
+    created_on=models.DateTimeField(auto_now_add=True)
     objects=models.Manager()

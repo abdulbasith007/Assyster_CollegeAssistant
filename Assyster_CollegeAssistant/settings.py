@@ -48,7 +48,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+
     'assyster_app.LoginCheckMiddleWare.LoginCheckMiddleWare'
+
+    
 ]
 
 ROOT_URLCONF = 'Assyster_CollegeAssistant.urls'
@@ -131,7 +135,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL='assyster_app.CustomUser'
-AUTHENTICATION_BACKENDS=['assyster_app.EmailBackEnd.EmailBackEnd']
+AUTHENTICATION_BACKENDS=['assyster_app.EmailBackEnd.EmailBackEnd']#,'django.contrib.auth.backends.ModelBackend']
 
 
 MEDIA_URL="/media/"

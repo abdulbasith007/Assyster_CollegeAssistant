@@ -82,3 +82,20 @@ class EditStudentForm(forms.Form):
     sex=forms.ChoiceField(label="Sex",choices=gender_choice,widget=forms.Select(attrs={"class":"form-control"}))
     session_year_id=forms.ChoiceField(label="Session Year",choices=session_list,widget=forms.Select(attrs={"class":"form-control"}))
     profile_pic=forms.FileField(label="Profile Pic",max_length=50,widget=forms.FileInput(attrs={"class":"form-control"}),required=False)
+
+'''
+class CreateTestForm(forms.Form):
+    test_name=forms.CharField(label="Test Name",max_length=50,widget=forms.TextInput(attrs={"class":"form-control"}))
+    conducted_by=forms.
+    date=forms.DateField()
+
+    course_list=[]
+    try:
+        courses = Courses.objects.all()
+        for course in courses:
+            small_course=(course.id,course.course_name)
+            course_list.append(small_course)
+    except:
+        course_list=[]
+    course_id=forms.ChoiceField(label="Course",choices=course_list,widget=forms.Select(attrs={"class":"form-control"}))
+'''

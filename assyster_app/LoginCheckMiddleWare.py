@@ -24,6 +24,8 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                     pass
                 elif modulename == "assyster_app.views" or modulename == "django.views.static":
                     pass
+                elif modulename == "assyster_app.OMRViews":
+                    pass
                 else:
                     #TODO:Verify if staff_home is created
                     return HttpResponseRedirect(reverse("staff_home"))
@@ -40,7 +42,7 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                 return HttpResponseRedirect(reverse("loginPage"))
 
         else:
-            if request.path == reverse("show_login") or request.path == reverse("do_login") or modulename == "django.contrib.auth.views" or modulename =="django.contrib.admin.sites" or modulename=="assyster_app.views":
+            if request.path == reverse("loginPage") or modulename == "django.contrib.auth.views" or modulename =="django.contrib.admin.sites" or modulename=="assyster_app.views":
                 pass
             else:
                 return HttpResponseRedirect(reverse("loginPage"))

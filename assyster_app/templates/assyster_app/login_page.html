@@ -2,19 +2,19 @@
 {% load static %}
 {% block content %}
 
-<form action="/" method="post" id="demo-form">
+<form action="/" method="post" id="demo-form" style="padding-right: 200px;padding-left: 200px;">
     {% csrf_token %}
-    <input type="email" class="form-control" placeholder="Email" name="email">
-    <input type="password" class="form-control" placeholder="Password" name="password">
-    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+    <input type="email" class="form-control" placeholder="Email" name="email"><br>
+    <input type="password" class="form-control" placeholder="Password" name="password"><br>
+    <button type="submit" class="btn btn-primary btn-block">Sign In</button><br>
 </form>
 
 <div class="col-12 text-center">
-    <a href="{% url 'signup_staff' %}">Staff Signup</a>
- </div><!-- /.col -->
-                           <div class="col-12 text-center">
+    <a href="{% url 'signup_staff' %}">Staff Signup</a><br>
+</div><!-- /.col -->
+<div class="col-12 text-center">
     <a href="{% url 'signup_student' %}">Student Signup</a>
- </div><!-- /.col -->
+</div><!-- /.col -->
 
 {% if messages %}
 <div class="col-12">

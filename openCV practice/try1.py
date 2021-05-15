@@ -9,7 +9,9 @@ widthImg  = 700
 questions=5
 choices=5
 ans= [1,2,0,2,4]
+
 ############################
+
 img=cv2.imread("1.jpg")
 print(img)
 tmpimg=Image.open("1.jpg")

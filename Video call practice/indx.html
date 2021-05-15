@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var vidyoconnector;
+        function onVidyoClientLoaded(status) {
+            switch (status.state) {
+                case "READY":
+                    console.log("success");
+                    VC.CreateVidyoConnector({
+                        viewId: "renderer",                            // Div ID where the composited video will be rendered, see VidyoConnector.html
+                        viewStyle: "VIDYO_CONNECTORVIEWSTYLE_Default", // Visual style of the composited renderer
+                        remoteParticipants: 15,                        // Maximum number of participants
+                        logFileFilter: "",
+                        logFileName: "",
+                        userData: ""
+                    }).then(function (vidyoConnector) {
+                        console.log("success2");
+                        vidyoconnector = vidyoConnector;
+                    })
+                    // The library is operating normally
+                    // After the VidyoClient/VidyoConnector is successfully initialized,
+                    // a global VC object will become available.
+                    //
+                    // Load the rest of the application here
+                    // ...
+                    break;
+                case "RETRYING":     // The library operating is temporarily paused
+                    break;
+                case "FAILED":       // The library operating has stopped
+                    break;
+                case "FAILEDVERSION":// The version of the Javascript library does not match the plugin
+                    status.plugInVersion; // The Version of the plugin currently installed
+                    status.jsVersion;     // The Version of the Javascript library loaded
+                    break;
+                case "NOTAVAILABLE": // The library is not available
+                    break;
+            }
+            return true; // Return true to reload the plugins if not available
+        }
+        function joinCall() {
+            vidyoconnector.Connect({
+                host: "0dfe9f.vidyo.io",
+                token: "cHJvdmlzaW9uAHVzZXIxQDBkZmU5Zi52aWR5by5pbwA2Mzc4NTI3MzU5MgAANmQ3NzkzNzhlOTc3ZTZlZDYzZGM5NDc3OTZjNTIyYWFhNGYzN2ViYzM3MDQ3OTIzZTI4ODhmYTE3MjNmZTg2MTAxNGQ3MGUxNWVkYjFiMjcyODMyMTJiNTJmNGNiYjIx",
+                displayName: "John Smith",
+                resourceId: "JohnSmithRoom",
+                onSuccess: function () { console.log("success3"); },
+                onFailure: function (reason) { console.log("fail"); },
+                onDisconnected: function () { console.log("disc"); }
+            })
+        }
+    </script>
+    <script
+        src="https://static.vidyo.io/latest/javascript/VidyoClient/VidyoClient.js?onload=onVidyoClientLoaded"></script>
+    Hiii
+    <h1>hihhihih</h1>
+    <div id="renderer">Heres a div</div>
+    <button onclick="joinCall()">join call</button>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+{% extends "assyster_app/base.html" %}
+
+{% load static %}
+{% block content %}
+
+<!-- Main content -->
+<section class="content">
+
+
+
+    <div class="container-fluid">
+
+        <br><br>
+        <h5>{{test.test_name}}</h5>
+        <h5>{{test.date}}</h5>
+        <br><br>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Test Results</h3>
+
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control float-right"
+                                    placeholder="Search">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Session Year</th>
+                                    <th>Course</th>
+                                    <th>Marks (In %)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for student in studRes %}
+                                <tr>
+                                    <td>{{ student.student_id.id }}</td>
+                                    <td>{{ student.student_id.admin.username }}</td>
+                                    <td>{{ student.student_id.admin.email }}</td>
+                                    <td>{{ student.student_id.session_year_id.session_start_year }} TO
+                                        {{ student.student_id.session_year_id.session_end_year }}</td>
+                                    <td>{{ student.student_id.course_id.course_name }}</td>
+                                    <td>{{ student.marks }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <div class="form-group">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+            {% endif %}
+            {% if message.tags == 'success' %}
+            <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!-- /.content -->
+{% endblock content %}

@@ -1,0 +1,40 @@
+{% extends "assyster_app/base.html" %}
+{% load static %}
+{% block content %}
+
+<form method="post" id="demo-form" style="padding-right: 200px;padding-left: 200px;">
+    {% csrf_token %}
+    <a href="{% url 'staff_home' %}">Back to Home Page</a>
+    <br><br>
+    <input type="text" class="form-control" placeholder="Test Name" name="test name"><br>
+    <input type="date" class="form-control" placeholder="Date" name="date"><br>
+    <br>
+    <label>subject </label>
+    <select class="form-control" name="subject">
+        {% for subject in subjects %}
+        <option value="{{ subject.id }}">{{ subject.subject_name }}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <label>Staff</label>
+    <select class="form-control" name="staff">
+        {% for staff in staffs %}
+        <option value="{{ staff.id }}">{{ staff.first_name }} {{ staff.last_name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary btn-block">Create Test</button><br>
+</form>
+
+{% if messages %}
+<div class="col-12">
+    {% for message in messages %}
+    {% if message.tags == 'error' %}
+    <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+    {% endif %}
+    {% if message.tags == 'success' %}
+    <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock content %}

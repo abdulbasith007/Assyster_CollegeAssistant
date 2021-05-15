@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from assyster_app import views,HodViews,StaffViews,StudentViews
+from assyster_app import views,HodViews,StaffViews,StudentViews,OMRViews
 
 from django.conf.urls.static import static
 from . import settings
@@ -23,7 +23,7 @@ from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.ShowLoginPage,name='loginPage'),
+    path('',views.ShowLoginPage,name="loginPage"),
     path('logout_user', views.logout_user,name="logout"),
     path('admin_home',HodViews.admin_home,name="admin_home"),
     
@@ -52,11 +52,42 @@ urlpatterns = [
     path('edit_course/<str:course_id>', HodViews.edit_course,name="edit_course"),
     #path('edit_course_save', HodViews.edit_course_save,name="edit_course_save"),
     
+
+
     #staff
     
     path('staff_home', StaffViews.staff_home, name="staff_home"),
+    #path('staff_take_attendance', StaffViews.staff_take_attendance, name="staff_take_attendance"),
+    #path('staff_update_attendance', StaffViews.staff_update_attendance, name="staff_update_attendance"),
+    path('get_students', StaffViews.get_students, name="get_students"),
+    #path('get_attendance_dates', StaffViews.get_attendance_dates,         name="get_attendance_dates"),
+    #path('get_attendance_student', StaffViews.get_attendance_student,         name="get_attendance_student"),
+    #path('save_attendance_data', StaffViews.save_attendance_data,         name="save_attendance_data"),
+    #path('save_updateattendance_data', StaffViews.save_updateattendance_data,         name="save_updateattendance_data"),
+
+    path('create_test',StaffViews.create_test, name="create_test"),
+    path('test/<int:test_id>',StaffViews.test_details, name="test_details"),
+    path('test_results/<int:test_id>',StaffViews.test_result_details, name="test_result_details"),
+    path('upload_answer_sheet/<int:test_id>/<int:student_id>',OMRViews.upload_answer_sheet, name="upload_answer_sheet"),
+    path('send_msg',StaffViews.send_msg, name="send_msg"),
+    
+
+
 
     #student
     
     path('student_home', StudentViews.student_home, name="student_home"),
+    #student profile url?
+
+
+
+
+
+    #tempapp
+    path('start_live_classroom',StaffViews.start_live_classroom, name="start_live_classroom"),
+    path('start_live_classroom_process',StaffViews.start_live_classroom_process, name="start_live_classroom_process"),
+
+    path('join_class_room/<int:subject_id>/<int:session_year_id>',StudentViews.join_class_room,name="join_class_room"),
+
+
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
